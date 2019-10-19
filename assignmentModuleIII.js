@@ -11,6 +11,18 @@ const fileDataPath = './data/';
 const fileNameEmployee = 'employee.json';
 const fileNameProjects = 'projects.json';
 
+const urlEmployees = 'http://5c055de56b84ee00137d25a0.mockapi.io/api/v1/employees';
+
+// Static file path
+app.use(express.static(__dirname + '/public'));
+// Html or rending Path
+app.set('views', './src/views');
+// View engine specification
+app.set('view engine', 'ejs');
+
+/* -------------------------
+   ROUTES
+   ------------------------- */
 app.get('/', (req, res) => {
     console.log('Main path');
     res.send('This path does not contain any data...');
@@ -38,29 +50,18 @@ app.get('/getemployeedetails/:id', (req, res) => {
     let employeeId = parseInt(req.params.id);
     let employeeData = getData('employee', employeeId);
     
-    console.log('/getemployeedetails/' + employeeId);
-    
     // Get employee details from URL
     employeeData
         .then(dataEmployee => { return JSON.parse(dataEmployee); })
-        .then(jsonEmployee => {
-            console.log('typeof jsonEmployee: ', typeof jsonEmployee);
-            console.log('jsonEmployee: ', jsonEmployee);
-            console.log('*** jsonEmployee[project_id]: ', jsonEmployee['project_id']);
-            
-            let projectData = getData('project', parseInt(jsonEmployee['project_id']));
+        .then(jsonEmployee => {let projectData = getData('project', parseInt(jsonEmployee['project_id']));
             
             projectData
                 .then(dataProject => { return JSON.parse(dataProject); })
                 .then(jsonProject => {
-                    console.log('typeof jsonProject: ', typeof jsonProject);
-                    console.log('jsonProject: ', jsonProject);
                     jsonEmployee['projectData'] = jsonProject;
                     return jsonEmployee;
                 })
                 .then(joinData => {
-                    console.log('typeof joinData: ', typeof joinData);
-                    console.log('joinData: ', joinData);
                     res.json(joinData);
                 });
         });
@@ -68,7 +69,16 @@ app.get('/getemployeedetails/:id', (req, res) => {
 
 // Employees list
 app.get('/employees/', (req, res) => {
-    res.json(readFile(fileDataPath + fileNameEmployee, -333));
+    // res.json(readFile(fileDataPath + fileNameEmployee, -333));
+    let employeeList = getData(urlEmployees);
+    
+    // Get employees list from URL
+    employeeList
+        .then(dataEmployees => { return JSON.parse(dataEmployees); })
+        .then(jsonData => {
+            //res.json(jsonData);
+            res.render('main', {jsonData, title: 'All Users List'});
+        });
 });
 
 // Initiate server
@@ -77,6 +87,9 @@ app.listen(port, err => {
     else { console.log('Server running on port: ', port); }
 });
 
+/* -------------------------
+   FUNCTIONS
+   ------------------------- */
 /*
 * Description: Fetch data from a provided URL, with Promises
 * */
@@ -84,7 +97,9 @@ const getData = (url, dataId) => {
     console.log('dataId: ', dataId);
     // Setting URL and headers for request
     let options = {
-        url: 'http://localhost:' + port + '/' + url + '/' + dataId,
+        url: url === 'employee' || url === 'project' ?
+            'http://localhost:' + port + '/' + url + '/' + dataId :
+            url,
         headers: {
             'User-Agent': 'request'
         }

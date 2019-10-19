@@ -1,6 +1,15 @@
 {
   "name": "Assignment2",
   "version": "1.0.0",
+  "main": "assignmentModuleIII.js",
+  "scripts": {
+    "start": "node assignmentModuleIII.js",
+    "dev": "nodemon assignmentModuleIII.js",
+    "test": "echo \"Error: no test specified\" & exit 1"
+  },
+  "keywords": ["Node", "EJS", "Express"],
+  "author": "OR",
+  "license": "ISC",
   "dependencies": {
     "ejs": "^2.7.1",
     "express": "^4.17.1",
