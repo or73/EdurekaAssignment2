@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "description": "Design and Development of a software application",
+    "duration": "9",
+    "period": "month",
+    "budget": "125980",
+    "money": "USD",
+    "createdAt": "07-20-2019 15:30:23"
+  }, {
+    "id": 2,
+    "description": "Design and Development of a surveillance system for Safe Cities",
+    "duration": "15",
+    "period": "month",
+    "budget": "2565780",
+    "money": "USD",
+    "createdAt": "12-24-2018 14:22:35"
+  }, {
+    "id":  3,
+    "description": "Control and Supervision of Data Center construction",
+    "duration": "3.5",
+    "period": "month",
+    "budget": "65000",
+    "money": "USD",
+    "createdAt": "06-16-2019 06:46:25"
+  }
+]

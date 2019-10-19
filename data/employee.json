@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Oscar",
+    "lastName": "Reyes",
+    "activity": "Project Manager",
+    "city": "Bogota",
+    "country": "Colombia",
+    "project_id": 1,
+    "createdAt": "07-20-2019 07:20:19"
+  }, {
+    "id": 2,
+    "name": "Susie",
+    "lastName": "Starch",
+    "activity": "Project Manager",
+    "city": "California",
+    "country": "USA",
+    "project_id": 2,
+    "createdAt": "07-03-2019 18:07:19"
+  }, {
+    "id": 3,
+    "name": "Karl",
+    "lastName": "Masson",
+    "activity": "Project Manager",
+    "city": "New York",
+    "country": "USA",
+    "project_id": 3,
+    "createdAt": "09-13-2019 15:13:19"
+  }
+]
